@@ -4,12 +4,21 @@ class King
 		@color = color
 	end
 
+	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
+	end
+
 end
 
 class Queen
 
 	def initialize(color)
 		@color = color
+	end
+
+	def valid_moves(max_dx,max_dy)
 	end
 
 end
@@ -20,6 +29,12 @@ class Rook
 		@color = color
 	end
 
+	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
+	end
+
 end
 
 class Bishop
@@ -27,6 +42,13 @@ class Bishop
 	def initialize(color)
 		@color = color
 	end	
+
+	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
+
+	end
 
 end
 
@@ -36,12 +58,24 @@ class Knight
 		@color = color
 	end
 
+	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
+	end
+
 end
 
 class Pawn
 
 	def initialize(color)
 		@color = color
+	end
+
+	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
 	end
 
 end
