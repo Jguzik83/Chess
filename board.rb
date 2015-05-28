@@ -16,12 +16,13 @@ class ChessBoard
       }
     end
 
-    def move_piece(source, destination, player_color)
-      #checks before moving
-      if valid_piece?(source, player_color)
-        @board[source] = @board[destination]
+    def get_piece(source)
+      @board[source].class
+    end
+
+    def move_piece(source, destination)
+        @board[destination] = @board[source]
         @board[source] = " "
-      end
     end
 
     def valid_piece?(piece_location, player_color)
@@ -40,21 +41,19 @@ class ChessBoard
       @board.keys.select { |col| col[0] == col_num[0] }.each do |position|
         column << @board[position]
       end
-      column
+      column.map { |piece| piece.color if piece.class != String }
     end
 
     def retrieve_row(row_num)
       row = Array.new
-      @board.keys.select { |col| col[1] == col_num[1] }.each do |position|
+      @board.keys.select { |col| col[1] == row_num[1] }.each do |position|
         column << @board[position]
       end
-      row
+      row.map { |piece| piece.color if piece.class != String }
     end
 
-    # def generic_retrieve()
-    #   row_col = Array.new
+    def generic_retrieve()
 
-
-    # end
+    end
 
 end
