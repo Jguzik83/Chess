@@ -1,3 +1,4 @@
+
 class King
 
 	def initialize(color)
@@ -8,6 +9,11 @@ class King
 	end
 
 	def to_s
+		if @color == 'white'
+			'♔'	
+		else
+			'♚'
+		end
 	end
 
 end
@@ -19,6 +25,14 @@ class Queen
 	end
 
 	def valid_moves(max_dx,max_dy)
+	end
+
+	def to_s
+		if @color == 'white'
+			'♕'	
+		else
+			'♛'	
+		end
 	end
 
 end
@@ -33,6 +47,11 @@ class Rook
 	end
 
 	def to_s
+		if @color == 'white'
+			'♖'
+		else
+			'♜'
+		end
 	end
 
 end
@@ -47,7 +66,11 @@ class Bishop
 	end
 
 	def to_s
-
+		if @color == 'white'
+			'♗'
+		else
+			'♝'
+		end
 	end
 
 end
@@ -62,6 +85,11 @@ class Knight
 	end
 
 	def to_s
+		if @color == 'white'
+			'♘'
+		else
+			'♞'
+		end
 	end
 
 end
@@ -76,6 +104,12 @@ class Pawn
 	end
 
 	def to_s
+		if @color == 'white'
+			'♙'
+		else
+			'♟'
+		end
 	end
 
 end
+
