@@ -1,4 +1,4 @@
-require_relative 'pieces'
+require_relative 'piece'
 
 class ChessBoard
   attr_reader :board
@@ -16,12 +16,13 @@ class ChessBoard
       }
     end
 
-    def move_piece(source, destination, player_color)
-      #checks before moving
-      if valid_piece?(source, player_color)
-        @board[source] = @board[destination]
+    def get_piece(source)
+      @board[source].class
+    end
+
+    def move_piece(source, destination)
+        @board[destination] = @board[source]
         @board[source] = " "
-      end
     end
 
     def valid_piece?(piece_location, player_color)
@@ -30,7 +31,29 @@ class ChessBoard
 
     def to_s
       @board.values.each_slice(8).each_with_index { |row, index| puts row.unshift(8 - index).join(" ") }
-      puts "  a b c d e f g h"
+      puts "   a b c d e f g h"
+    end
+
+
+    #private
+    def retrieve_column(col_num)
+      column = Array.new
+      @board.keys.select { |col| col[0] == col_num[0] }.each do |position|
+        column << @board[position]
+      end
+      column.map { |piece| piece.color if piece.class != String }
+    end
+
+    def retrieve_row(row_num)
+      row = Array.new
+      @board.keys.select { |col| col[1] == row_num[1] }.each do |position|
+        column << @board[position]
+      end
+      row.map { |piece| piece.color if piece.class != String }
+    end
+
+    def generic_retrieve()
+
     end
 
 end
