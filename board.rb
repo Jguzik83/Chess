@@ -36,7 +36,11 @@ class ChessBoard
 
     def possible_moves(piece_location)
       coordinate = coordinate_position_convert(piece_location)
-      @board[piece_location].moves.map { |moves| position_calculator(piece_location, moves) }
+      @board[piece_location].moves.map { |moves| position_calculator(moves, coordinate) }.select do |coordinates|
+        coordinates[0] > 0 && coordinates[0] < 9 && coordinates[1] > 0 && coordinates[1] < 9
+      end.map { |coordinates| coordinate_position_convert(coordinates) }.select do |position|
+         @board[position] == ' ' || @board[position].color != @board[piece_location].color
+      end
     end
 
     #private
@@ -47,7 +51,15 @@ class ChessBoard
         input[0] = mapping[input[0]]
         input.join
       else
-        input.chars.map { |coordinate| coordinate =~ /[a-z]/ ? mapping.invert[coordinate] : coordinate.to_i }
+        input.chars.map do |coordinate|
+          if coordinate =~ /[a-z]/
+            mapping.invert[coordinate]
+          elsif coordinate.kind_of?(String)
+            coordinate.to_i.abs
+          else
+            coordinates.abs
+          end
+        end
       end
     end
 
