@@ -1,5 +1,6 @@
 require_relative 'piece'
 
+
 describe 'Piece' do
 
   it 'should initialize a a King' do
@@ -74,3 +75,4 @@ describe 'Piece' do
 
 
 end
+
