@@ -92,5 +92,13 @@ describe 'Piece' do
       expect(piece.valid_moves?([1,1])).to eq(false)
   end
 
+  it 'should allow any diagonal move for a Bishop' do
+      piece = Bishop.new('black')
+      expect(piece.valid_moves?([2,2])).to eq(true)
+  end
 
+    it 'should allow any diagonal move for a Bishop' do
+      piece = Bishop.new('black')
+      expect(piece.valid_moves?([1,2])).to eq(false)
+  end
 end

@@ -88,11 +88,10 @@ class Bishop < Piece
 	attr_reader :move_pattern
 	def initialize(color)
 		super(color)
-		@move_pattern = 8
 	end
 
 	def valid_moves?(move_arr)
-		move >= @move_pattern
+		move_arr[0] > 0 && move_arr[1] > 0 && move_arr[0] == move_arr[1]
 	end
 
 	def to_s
