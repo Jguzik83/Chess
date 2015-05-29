@@ -19,13 +19,7 @@ class King < Piece
 	end
 
 	def valid_moves?(move_arr) #array[dx,dy]
-		#Test method to move pieces
-		move >= @move_pattern
-				# # (move.abs) = -1 or 1
-		# x.abs == dx 1 only (horizontal)
-		# y.abs == dy 1 only (vertical)
-
-
+		move_arr[0].between?(0,1) && move_arr[1].between?(0,1)
 	end
 
 	def to_s
