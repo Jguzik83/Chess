@@ -221,5 +221,13 @@ describe 'Piece' do
         expect(piece.possible_moves).to eq([[0,1],[0,2]])
   end
 
+      it 'should tell me if a piece has moved' do
+        piece = Pawn.new('black')
+        expect(piece.moved).to eq(false)
+  end
 
+      it 'should tell me if a piece has moved' do
+        piece = King.new('black')
+        expect(piece.moved).to eq(false)
+  end
 end
