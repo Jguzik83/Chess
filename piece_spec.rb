@@ -1,4 +1,4 @@
-require_relative 'piece'
+require_relative 'piece.rb'
 
 describe 'Piece' do
 
@@ -115,6 +115,21 @@ describe 'Piece' do
   it 'should allow a single box move in any direction for a King' do
       piece = King.new('black')
       expect(piece.valid_moves?([1,0])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([1,2])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([2,1])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([2,2])).to eq(false)
   end
 
 end

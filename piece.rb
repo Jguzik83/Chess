@@ -106,12 +106,12 @@ class Knight < Piece
 	attr_reader :move_pattern
 	def initialize(color)
 		super(color)
-		@move_pattern = 8
 		@passable = true
 	end
 
 	def valid_moves?(move_arr)
-		move >= @move_pattern
+		(move_arr[0] == 1 && move_arr[1] == 2) ||
+		(move_arr[0] == 2 && move_arr[1] == 1)
 	end
 
 	def to_s
