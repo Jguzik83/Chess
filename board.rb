@@ -34,20 +34,12 @@ class ChessBoard
       puts '    ' + ('a'..'h').to_a.join('   ')
     end
 
+    def possible_moves(piece_location)
+      coordinate = coordinate_position_convert(piece_location)
+      @board[piece_location].moves.map { |moves| position_calculator(piece_location, moves) }
+    end
+
     #private
-    def position_difference(source, destination) # calc the x, y distances from given positions
-      start_coordinates = coordinate_position_convert(destination)
-      end_coordinates = coordinate_position_convert(source)
-      end_coordinates.zip(start_coordinates).map { |coordinates| (coordinates.first - coordinates.last).abs }
-    end
-
-    def generic_retrieve(position, row_or_col) # returns array of the color of the pieces in the row or col
-      row_or_col == "col" ? pos = 0 : pos = 1
-      @board.select do |space, piece|
-        space[pos] == position[pos]
-      end.values.map { |piece| piece.color if piece.class != String }
-    end
-
     def coordinate_position_convert(input) # converts coordinate ('a1') to position ([1,1]) or vice versa
       mapping = { 1 => 'a', 2 => 'b', 3 => 'c', 4 => 'd', 5 => 'e', 6 => 'f', 7 => 'g', 8 => 'h' }
 
@@ -58,6 +50,28 @@ class ChessBoard
         input.chars.map { |coordinate| coordinate =~ /[a-z]/ ? mapping.invert[coordinate] : coordinate.to_i }
       end
     end
+
+    def position_calculator(source, destination) # calc the x, y distances from given positions ([x, y])
+      if source.kind_of?(String) != destination.kind_of?(String)  # for if one input is 'a2' and other [1,2]
+        if source.kind_of?(String)
+          source = coordinate_position_convert(source)
+        elsif destination.kind_of?(String)
+          destination = coordinate_position_convert(destination)
+        end
+      elsif source.kind_of?(String) && destination.kind_of?(String)
+        source = coordinate_position_convert(source)
+        destination = coordinate_position_convert(destination)
+      end
+      destination.zip(source).map { |coordinates| coordinates.first - coordinates.last }
+    end
+
+    def generic_retrieve(position, row_or_col) # returns array of the color of the pieces in the row or col
+      row_or_col == "col" ? pos = 0 : pos = 1
+      @board.select do |space, piece|
+        space[pos] == position[pos]
+      end.values.map { |piece| piece.color if piece.class != String }
+    end
+
 
 
 
