@@ -30,8 +30,8 @@ class ChessBoard
     end
 
     def to_s
-      @board.values.each_slice(8).each_with_index { |row, index| puts row.unshift(8 - index).join(" ") }
-      puts "   a b c d e f g h"
+      @board.values.each_slice(8).each_with_index { |row, index| puts row.unshift(8 - index).join("   ") }
+      puts '    ' + ('a'..'h').to_a.join('   ')
     end
 
 
