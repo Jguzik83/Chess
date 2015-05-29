@@ -16,44 +16,32 @@ class ChessBoard
       }
     end
 
-    def get_piece(source)
-      @board[source].class
+    def get_piece(position)  # return's the class of the piece at give position
+      @board[position].class
     end
 
-    def move_piece(source, destination)
+    def move_piece(source, destination) # move the piece from source to destination
         @board[destination] = @board[source]
         @board[source] = " "
     end
 
-    def valid_piece?(piece_location, player_color)
+    def valid_piece?(piece_location, player_color) # checks if the player have chosen a valid piece to move
       return @board[piece_location].color == player_color if @board[piece_location] != " "
     end
 
-    def to_s
+    def to_s # prints board out
       @board.values.each_slice(8).each_with_index { |row, index| puts row.unshift(8 - index).join("   ") }
       puts '    ' + ('a'..'h').to_a.join('   ')
     end
 
 
     #private
-    def retrieve_column(col_num)
-      column = Array.new
-      @board.keys.select { |col| col[0] == col_num[0] }.each do |position|
-        column << @board[position]
-      end
-      column.map { |piece| piece.color if piece.class != String }
+    def generic_retrieve(position, row_or_col)  # returns array of the color of the pieces in the row or col
+      row_or_col == "col" ? pos = 0 : pos = 1
+      @board.select do |space, piece|
+        space[pos] == position[pos]
+      end.values.map { |piece| piece.color if piece.class != String }
     end
 
-    def retrieve_row(row_num)
-      row = Array.new
-      @board.keys.select { |col| col[1] == row_num[1] }.each do |position|
-        column << @board[position]
-      end
-      row.map { |piece| piece.color if piece.class != String }
-    end
-
-    def generic_retrieve()
-
-    end
 
 end
