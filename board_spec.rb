@@ -1,5 +1,6 @@
 require_relative 'board'
 
+
 describe ChessBoard do
   let(:board) {ChessBoard.new}
 
@@ -19,3 +20,4 @@ describe ChessBoard do
 
 
 end
+

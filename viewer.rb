@@ -1,3 +1,5 @@
+require 'pry'
+
 require 'artii'
 
 class Viewer
@@ -15,15 +17,31 @@ class Viewer
     puts "#{player}, your move?"
   end
 
-  def get_move
-    gets.chomp
+  def self.get_move
+    gets.chomp.downcase
   end
 
-  def display_moves(array)
-    #need to do something here because i don't want to change array,
-    #but i don't want to print out an array
-    print "#{array}"
+  def self.display_moves(string)
+    print "#{string}\n"
   end
 
+  def self.where_to(player, position)
+    puts "#{player}, move #{position} where?\n"
+  end
 
+  def self.recap(player, piece, position, move_to)
+    puts "Ok, #{player}'s #{piece} #{position} to #{move_to}"
+  end
+
+  def self.capture
+    puts "Ok, #{player}'s #{piece} captures #{player == 'white' ? 'black' : 'white'}'s #{move_to}"
+  end
+
+  def self.invalid_piece
+    puts "I'm sorry, but that isn't your piece!"
+  end
+
+  def self.invalid_move
+    puts "I'm sorry, but that is not a possible move"
+  end
 end
