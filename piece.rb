@@ -11,14 +11,12 @@ end
 class King < Piece
 # The king moves exactly one vacant square in any direction:
 # forwards, backwards, left, right, or diagonally. It can also castle in conjunction with a rook.
-	attr_reader :move_pattern
-
 	def initialize(color)
 		super(color)
-		@move_pattern = 1
 	end
 
 	def valid_moves?(move_arr) #array[dx,dy]
+		return false if move_arr == [0,0]
 		move_arr[0].between?(0,1) && move_arr[1].between?(0,1)
 	end
 
@@ -34,14 +32,14 @@ end
 class Queen < Piece
 # The queen moves any number of vacant squares in any direction:
 # forwards, backwards, left, right, or diagonally, in a straight line.
-	attr_reader :move_pattern
 	def initialize(color)
 		super(color)
-		@move_pattern = 8
 	end
 
 	def valid_moves?(move_arr)
-		move >= @move_pattern
+		return false if move_arr == [0,0]
+		#Bishop moves and #Rook moves
+		move_arr[0] == move_arr[1] || (move_arr[0].between?(1,8) && move_arr[1] == 0) || (move_arr[0] == 0 && move_arr[1].between?(1,8))
 	end
 
 	def to_s
@@ -57,12 +55,12 @@ end
 class Rook < Piece
 	# The rook moves any number of vacant squares forwards, backwards, left, or right in a straight line.
 	# It also takes part, along with the king, in a special move called castling.
-	attr_reader :move_pattern
 	def initialize(color)
 		super(color)
 	end
 
 	def valid_moves?(move_arr)
+				move_arr[0] > 0 && move_arr[1] > 0
 		(move_arr[0].between?(1,8) && move_arr[1] == 0) || (move_arr[0] == 0 && move_arr[1].between?(1,8))
 	end
 
@@ -110,6 +108,7 @@ class Knight < Piece
 	end
 
 	def valid_moves?(move_arr)
+		move_arr[0] > 0 && move_arr[1] > 0
 		(move_arr[0] == 1 && move_arr[1] == 2) ||
 		(move_arr[0] == 2 && move_arr[1] == 1)
 	end

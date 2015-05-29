@@ -132,4 +132,55 @@ describe 'Piece' do
       expect(piece.valid_moves?([2,2])).to eq(false)
   end
 
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([3,3])).to eq(true)
+  end
+
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([3,3])).to eq(true)
+  end
+
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([4,0])).to eq(true)
+  end
+
+    it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([2,1])).to eq(false)
+  end
+
+      it 'should return false if Queen does not move' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+
+    it 'should return false if Pawn does not move' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+    it 'should return false if Rook does not move' do
+        piece = Rook.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if King does not move' do
+        piece = King.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if Bishop does not move' do
+        piece = Bishop.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if Knight does not move' do
+        piece = Knight.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
 end
