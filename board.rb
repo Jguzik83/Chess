@@ -34,14 +34,23 @@ class ChessBoard
       puts '    ' + ('a'..'h').to_a.join('   ')
     end
 
-
     #private
-    def generic_retrieve(position, row_or_col)  # returns array of the color of the pieces in the row or col
+    def position_difference(source, destination) # calc the x, y distances from given positions
+      start_coordinates = position_convert(destination)
+      end_coordinates = position_convert(source)
+      end_coordinates.zip(start_coordinates).map { |coordinates| (coordinates.first - coordinates.last).abs }
+    end
+
+    def generic_retrieve(position, row_or_col) # returns array of the color of the pieces in the row or col
       row_or_col == "col" ? pos = 0 : pos = 1
       @board.select do |space, piece|
         space[pos] == position[pos]
       end.values.map { |piece| piece.color if piece.class != String }
     end
 
+    def position_convert(position) # converts position to numbers, ex 'a1' => [1, 1]
+      coordinate_mapping = { 'a' => 1, b => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
+      position.chars.map { |coordinate| coordinate =~ /[a-z]/  ? coordinate_mapping[coordinate] : coordinate.to_i  }
+    end
 
 end
