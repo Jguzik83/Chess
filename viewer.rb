@@ -38,7 +38,7 @@ class Viewer
   end
 
   def self.invalid_piece
-    puts "I'm sorry, but that isn't your piece!"
+    puts "I'm sorry: Invalid selection"
   end
 
   def self.invalid_move
