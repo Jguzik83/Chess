@@ -1,3 +1,17 @@
+KING_MOVES = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]]
+PAWN_MOVES = [[0,1],[0,2]]
+BISHOP_MOVES = [
+      [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
+      [[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
+    ]
+KNIGHT_MOVES = [[-1,2],[1,2],[-2,1],[2,1],[-2,-1],[2,-1],[-1,-2],[1,-2]]
+ROOK_MOVES = 		[
+			[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8]],
+			[[0,-1],[0,-2],[0,-3],[0,-4],[0,-5],[0,-6],[0,-7],[0,-8]],
+			[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
+			[[-1,0],[-2,0],[-3,0],[-4,0],[-5,0],[-6,0],[-7,0],[-8,0]]
+		]
+
 class Piece
 	attr_reader :color, :passable, :count_moves
 	def initialize(color)
@@ -14,7 +28,7 @@ class King < Piece
 attr_reader :possible_moves
 	def initialize(color)
 		super(color)
-		@possible_moves = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]]
+		@possible_moves = KING_MOVES
 	end
 
 	def valid_moves?(move_arr) #array[dx,dy]
@@ -37,15 +51,7 @@ class Queen < Piece
 attr_reader :possible_moves
 	def initialize(color)
 		super(color)
-		@possible_moves =
-		[
-		[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8]],
-		[[0,-1],[0,-2],[0,-3],[0,-4],[0,-5],[0,-6],[0,-7],[0,-8]],
-		[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-		[[-1,0],[-2,0],[-3,0],[-4,0],[-5,0],[-6,0],[-7,0],[-8,0]],
-		[[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
-		[[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
-		]
+		@possible_moves = BISHOP_MOVES + ROOK_MOVES
 	end
 
 	def valid_moves?(move_arr)
@@ -70,13 +76,7 @@ class Rook < Piece
 	attr_reader :possible_moves
 	def initialize(color)
 		super(color)
-		@possible_moves =
-		[
-			[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8]],
-			[[0,-1],[0,-2],[0,-3],[0,-4],[0,-5],[0,-6],[0,-7],[0,-8]],
-			[[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
-			[[-1,0],[-2,0],[-3,0],[-4,0],[-5,0],[-6,0],[-7,0],[-8,0]]
-		]
+		@possible_moves = ROOK_MOVES
 	end
 
 	def valid_moves?(move_arr)
@@ -100,12 +100,7 @@ class Bishop < Piece
 	attr_reader :possible_moves
 	def initialize(color)
 		super(color)
-		@possible_moves =
-		[
-			[[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
-			[[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
-
-		]
+		@possible_moves = BISHOP_MOVES
 
 	end
 
@@ -132,7 +127,7 @@ class Knight < Piece
 	def initialize(color)
 		super(color)
 		@passable = true
-		@possible_moves = [[-1,2],[1,2],[-2,1],[2,1],[-2,-1],[2,-1],[-1,-2],[1,-2]]
+		@possible_moves = KNIGHT_MOVES
 	end
 
 	def valid_moves?(move_arr)
@@ -159,7 +154,7 @@ class Pawn < Piece
 	attr_reader :possible_moves
 	def initialize(color)
 		super(color)
-		@possible_moves = [[0,1]]
+		@possible_moves = PAWN_MOVES
 	end
 
 	def valid_moves?(move_arr)
