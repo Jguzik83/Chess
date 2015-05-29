@@ -186,12 +186,14 @@ describe 'Piece' do
 
      it 'should return possible moves for King' do
         piece = King.new('black')
-        expect(piece.possible_moves).to eq([[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]])
+        expect(piece.possible_moves).to eq([[[0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]]])
   end
     it 'should return possible moves for Queen' do
         piece = Queen.new('black')
         expect(piece.possible_moves).to eq([[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8]],
  [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7], [-8, -8]],
+ [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7], [-8, 8]],
+ [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7], [8, -8]],
  [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
  [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7], [0, -8]],
  [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0]],
@@ -209,19 +211,29 @@ describe 'Piece' do
       it 'should return possible moves for Bishop' do
         piece = Bishop.new('black')
         expect(piece.possible_moves).to eq([
-      [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
-      [[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
+  [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
+  [[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
+  [[-1,1],[-2,2],[-3,3],[-4,4],[-5,5],[-6,6],[-7,7],[-8,8]],
+  [[1,-1],[2,-2],[3,-3],[4,-4],[5,-5],[6,-6],[7,-7],[8,-8]]
     ])
   end
       it 'should return possible moves for Knight' do
         piece = Knight.new('black')
-        expect(piece.possible_moves).to eq([[-1,2],[1,2],[-2,1],[2,1],[-2,-1],[2,-1],[-1,-2],[1,-2]])
+        expect(piece.possible_moves).to eq([[[-1, 2], [1, 2], [-2, 1], [2, 1], [-2, -1], [2, -1], [-1, -2], [1, -2]]])
   end
       it 'should return possible moves for Pawn' do
         piece = Pawn.new('black')
-        expect(piece.possible_moves).to eq([[0,1],[0,2]])
+        expect(piece.possible_moves).to eq([[[0, 1], [0, 2]]])
   end
 
+      it 'should tell me if a piece has moved' do
+        piece = Pawn.new('black')
+        expect(piece.moved).to eq(false)
+  end
 
+      it 'should tell me if a piece has moved' do
+        piece = King.new('black')
+        expect(piece.moved).to eq(false)
+  end
 end
 
