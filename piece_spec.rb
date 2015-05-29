@@ -67,9 +67,29 @@ describe 'Piece' do
     expect(piece.color).to eq('black')
   end
 
-    it 'should not be passable' do
+  it 'should not be passable' do
     piece = Pawn.new('black')
     expect(piece.passable).to eq(false)
+  end
+
+  it 'should only allow a [0,1] move for Pawn' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([0,1])).to eq(true)
+  end
+
+  it 'should only allow a [0,1] move for Pawn' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([1,1])).to eq(false)
+  end
+
+  it 'should only allow X OR Y  move for Rook' do
+      piece = Rook.new('black')
+      expect(piece.valid_moves?([6,0])).to eq(true)
+  end
+
+  it 'should only allow X OR Y  move for Rook' do
+      piece = Rook.new('black')
+      expect(piece.valid_moves?([1,1])).to eq(false)
   end
 
 
