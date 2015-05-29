@@ -36,8 +36,8 @@ class ChessBoard
 
     #private
     def position_difference(source, destination) # calc the x, y distances from given positions
-      start_coordinates = position_convert(destination)
-      end_coordinates = position_convert(source)
+      start_coordinates = coordinate_position_convert(destination)
+      end_coordinates = coordinate_position_convert(source)
       end_coordinates.zip(start_coordinates).map { |coordinates| (coordinates.first - coordinates.last).abs }
     end
 
@@ -48,9 +48,17 @@ class ChessBoard
       end.values.map { |piece| piece.color if piece.class != String }
     end
 
-    def position_convert(position) # converts position to numbers, ex 'a1' => [1, 1]
-      coordinate_mapping = { 'a' => 1, b => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
-      position.chars.map { |coordinate| coordinate =~ /[a-z]/  ? coordinate_mapping[coordinate] : coordinate.to_i  }
+    def coordinate_position_convert(input) # converts coordinate ('a1') to position ([1,1]) or vice versa
+      mapping = { 1 => 'a', 2 => 'b', 3 => 'c', 4 => 'd', 5 => 'e', 6 => 'f', 7 => 'g', 8 => 'h' }
+
+      if input.kind_of?(Array)
+        input[0] = mapping[input[0]]
+        input.join
+      else
+        input.chars.map { |coordinate| coordinate =~ /[a-z]/ ? mapping.invert[coordinate] : coordinate.to_i }
+      end
     end
+
+
 
 end
