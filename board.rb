@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'piece'
 
 class ChessBoard
@@ -35,8 +36,9 @@ class ChessBoard
     end
 
     def possible_moves(piece_location)
+      #binding.pry
       coordinate = coordinate_position_convert(piece_location)
-      @board[piece_location].moves.map { |moves| position_calculator(moves, coordinate) }.select do |coordinates|
+      @board[piece_location].possible_moves.reduce(:concat).map { |moves| position_calculator(moves, coordinate) }.select do |coordinates|
         coordinates[0] > 0 && coordinates[0] < 9 && coordinates[1] > 0 && coordinates[1] < 9
       end.map { |coordinates| coordinate_position_convert(coordinates) }.select do |position|
          @board[position] == ' ' || @board[position].color != @board[piece_location].color
