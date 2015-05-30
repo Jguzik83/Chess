@@ -35,15 +35,47 @@ class ChessBoard
       puts '    ' + ('a'..'h').to_a.join('   ')
     end
 
-    def possible_moves(piece_location)
+    # def possible_moves(piece_location) #change to return ALL possible positions to be run through checks
+    #   #binding.pry
+    #   coordinate = coordinate_position_convert(piece_location)
+
+    #   garbage_array = @board[piece_location].possible_moves.reduce(:concat).map { |moves| position_calculator(moves, coordinate) }
+      
+
+    #   filtered_array = garbage_array.select do |coordinates|
+    #     coordinates[0] > 0 && coordinates[0] < 9 && coordinates[1] > 0 && coordinates[1] < 9
+    #   end
+
+    #   final_array = filtered_array.map { |coordinates| coordinate_position_convert(coordinates) }.select do |position|
+    #      @board[position] == ' ' || @board[position].color != @board[piece_location].color
+    #   end
+    #   # binding.pry
+    # end
+
+    def possible_moves(piece_location) #change to return ALL possible positions to be run through checks
       #binding.pry
       coordinate = coordinate_position_convert(piece_location)
-      @board[piece_location].possible_moves.reduce(:concat).map { |moves| position_calculator(moves, coordinate) }.select do |coordinates|
+
+      garbage_array = @board[piece_location].possible_moves.reduce(:concat).map { |moves| position_calculator(moves, coordinate) }
+      
+
+      filtered_array = garbage_array.select do |coordinates|
         coordinates[0] > 0 && coordinates[0] < 9 && coordinates[1] > 0 && coordinates[1] < 9
-      end.map { |coordinates| coordinate_position_convert(coordinates) }.select do |position|
-         @board[position] == ' ' || @board[position].color != @board[piece_location].color
       end
+
+      final_array = filtered_array.map { |coordinates| coordinate_position_convert(coordinates) }.select do |position|
+         is_empty?(position) || @board[position].color != @board[piece_location].color
+      end
+      # binding.pry
     end
+
+    def is_empty?(position)
+      @board[position] == ' '
+    end
+
+
+
+
 
     #private
     def coordinate_position_convert(input) # converts coordinate ('a1') to position ([1,1]) or vice versa
@@ -90,3 +122,5 @@ class ChessBoard
 
 
 end
+board = ChessBoard.new
+# binding.pry

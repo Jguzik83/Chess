@@ -18,6 +18,14 @@ describe ChessBoard do
     expect(board.valid_piece?('a1', 'black')).to eq(false)
   end
 
+  it 'should give us a list of possible legal moves for the Rook' do
+    expect(board.possible_moves('a1')).to eq(["a3", "a4", "a5", "a6", "a7", "a8"])
+  end
+
+  it 'should give us a list of possible legal moves for the Queen' do
+    expect(board.possible_moves('e1').uniq).to eq(["g3", "h4", "c3", "b4", "a5", "e3", "e4", "e5", "e6", "e7", "e8"])
+  end
+
 
 end
 
