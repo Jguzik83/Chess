@@ -1,3 +1,5 @@
+require 'pry'
+
 require 'artii'
 
 class Viewer
@@ -19,10 +21,8 @@ class Viewer
     gets.chomp.downcase
   end
 
-  def self.display_moves(array)
-    #need to do something here because i don't want to change array,
-    #but i don't want to print out an array
-    print "#{array}"
+  def self.display_moves(string)
+    print "#{string}\n"
   end
 
   def self.where_to(player, position)
@@ -37,4 +37,11 @@ class Viewer
     puts "Ok, #{player}'s #{piece} captures #{player == 'white' ? 'black' : 'white'}'s #{move_to}"
   end
 
+  def self.invalid_piece
+    puts "I'm sorry: Invalid selection"
+  end
+
+  def self.invalid_move
+    puts "I'm sorry, but that is not a possible move"
+  end
 end

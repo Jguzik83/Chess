@@ -1,4 +1,5 @@
-require_relative 'piece'
+require_relative 'piece.rb'
+
 
 describe 'Piece' do
 
@@ -67,10 +68,172 @@ describe 'Piece' do
     expect(piece.color).to eq('black')
   end
 
-    it 'should not be passable' do
+  it 'should not be passable' do
     piece = Pawn.new('black')
     expect(piece.passable).to eq(false)
   end
 
+  it 'should only allow a [0,1] move for Pawn' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([0,1])).to eq(true)
+  end
 
+  it 'should only allow a [0,1] move for Pawn' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([1,1])).to eq(false)
+  end
+
+  it 'should only allow X OR Y  move for Rook' do
+      piece = Rook.new('black')
+      expect(piece.valid_moves?([6,0])).to eq(true)
+  end
+
+  it 'should only allow X OR Y  move for Rook' do
+      piece = Rook.new('black')
+      expect(piece.valid_moves?([1,1])).to eq(false)
+  end
+
+  it 'should allow any diagonal move for a Bishop' do
+      piece = Bishop.new('black')
+      expect(piece.valid_moves?([2,2])).to eq(true)
+  end
+
+  it 'should allow any diagonal move for a Bishop' do
+      piece = Bishop.new('black')
+      expect(piece.valid_moves?([1,2])).to eq(false)
+  end
+
+  it 'should allow a single box move in any direction for a King' do
+      piece = King.new('black')
+      expect(piece.valid_moves?([1,1])).to eq(true)
+  end
+
+  it 'should allow a single box move in any direction for a King' do
+      piece = King.new('black')
+      expect(piece.valid_moves?([2,1])).to eq(false)
+  end
+
+  it 'should allow a single box move in any direction for a King' do
+      piece = King.new('black')
+      expect(piece.valid_moves?([1,0])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([1,2])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([2,1])).to eq(true)
+  end
+
+  it 'should allow an L-shaped move in any direction for a Knight' do
+      piece = Knight.new('black')
+      expect(piece.valid_moves?([2,2])).to eq(false)
+  end
+
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([3,3])).to eq(true)
+  end
+
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([3,3])).to eq(true)
+  end
+
+  it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([4,0])).to eq(true)
+  end
+
+    it 'should allow for any number of moves in any direction for a Queen' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([2,1])).to eq(false)
+  end
+
+      it 'should return false if Queen does not move' do
+      piece = Queen.new('black')
+      expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+
+    it 'should return false if Pawn does not move' do
+      piece = Pawn.new('black')
+      expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+    it 'should return false if Rook does not move' do
+        piece = Rook.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if King does not move' do
+        piece = King.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if Bishop does not move' do
+        piece = Bishop.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+      it 'should return false if Knight does not move' do
+        piece = Knight.new('black')
+        expect(piece.valid_moves?([0,0])).to eq(false)
+  end
+
+     it 'should return possible moves for King' do
+        piece = King.new('black')
+        expect(piece.possible_moves).to eq([[[0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]]])
+  end
+    it 'should return possible moves for Queen' do
+        piece = Queen.new('black')
+        expect(piece.possible_moves).to eq([[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8]],
+ [[-1, -1], [-2, -2], [-3, -3], [-4, -4], [-5, -5], [-6, -6], [-7, -7], [-8, -8]],
+ [[-1, 1], [-2, 2], [-3, 3], [-4, 4], [-5, 5], [-6, 6], [-7, 7], [-8, 8]],
+ [[1, -1], [2, -2], [3, -3], [4, -4], [5, -5], [6, -6], [7, -7], [8, -8]],
+ [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
+ [[0, -1], [0, -2], [0, -3], [0, -4], [0, -5], [0, -6], [0, -7], [0, -8]],
+ [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0]],
+ [[-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0], [-6, 0], [-7, 0], [-8, 0]]])
+  end
+    it 'should return possible moves for Rook' do
+        piece = Rook.new('black')
+        expect(piece.possible_moves).to eq([
+      [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8]],
+      [[0,-1],[0,-2],[0,-3],[0,-4],[0,-5],[0,-6],[0,-7],[0,-8]],
+      [[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0]],
+      [[-1,0],[-2,0],[-3,0],[-4,0],[-5,0],[-6,0],[-7,0],[-8,0]]
+    ])
+  end
+      it 'should return possible moves for Bishop' do
+        piece = Bishop.new('black')
+        expect(piece.possible_moves).to eq([
+  [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
+  [[-1,-1],[-2,-2],[-3,-3],[-4,-4],[-5,-5],[-6,-6],[-7,-7],[-8,-8]],
+  [[-1,1],[-2,2],[-3,3],[-4,4],[-5,5],[-6,6],[-7,7],[-8,8]],
+  [[1,-1],[2,-2],[3,-3],[4,-4],[5,-5],[6,-6],[7,-7],[8,-8]]
+    ])
+  end
+      it 'should return possible moves for Knight' do
+        piece = Knight.new('black')
+        expect(piece.possible_moves).to eq([[[-1, 2], [1, 2], [-2, 1], [2, 1], [-2, -1], [2, -1], [-1, -2], [1, -2]]])
+  end
+      it 'should return possible moves for Pawn' do
+        piece = Pawn.new('black')
+        expect(piece.possible_moves).to eq([[[0, 1], [0, 2]]])
+  end
+
+      it 'should tell me if a piece has moved' do
+        piece = Pawn.new('black')
+        expect(piece.moved).to eq(false)
+  end
+
+      it 'should tell me if a piece has moved' do
+        piece = King.new('black')
+        expect(piece.moved).to eq(false)
+  end
 end
+

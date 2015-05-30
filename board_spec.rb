@@ -1,40 +1,23 @@
 require_relative 'board'
 
-describe 'ChessBoard' do
 
-  it 'should instantiate a new ChessBoard' do
-    board  = ChessBoard.new
-    expect(board).to be_a ChessBoard
-  end
+describe ChessBoard do
+  let(:board) {ChessBoard.new}
 
-  it 'should print out a board with initial piece settings' do
-    board  = ChessBoard.new
-    expect(board.to_s)
-  end
-#tests below for specific methods -- change arguments
-  it 'should get a piece from the board' do
-    board  = ChessBoard.new
-    expect(board.get_piece(source)).
+  it "get_piece method returns type of piece given the location of the piece" do
+    expect(board.get_piece('d1')).to eq(King)
   end
 
-  it 'should move a piece' do
-    board  = ChessBoard.new
-    expect(board.move_piece(source, destination))
+  it "move_piece method moves a piece given it's start and end positions" do
+    board.move_piece('g1', 'f3')
+    expect(board.board['f3']).not_to eq(" ")
   end
 
-  it 'should tell us if a piece is valid' do
-    board  = ChessBoard.new
-    expect(board.valid_piece?(piece_location, player_color))
+  it "valid_piece? method checks if a player has picked the location of a piece he/she can move" do
+    expect(board.valid_piece?('a1', 'white')).to eq(true)
+    expect(board.valid_piece?('a1', 'black')).to eq(false)
   end
 
-  it 'should retrieve a column' do
-    board  = ChessBoard.new
-    expect(board.retrieve_column(col_num))
-  end
-
-  it 'retrieve a row' do
-    board  = ChessBoard.new
-    expect(retrieve_row(row_num))
-  end
 
 end
+
